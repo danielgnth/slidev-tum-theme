@@ -27,7 +27,7 @@ Report vulnerabilities privately through [GitHub security advisories](https://gi
 | Dependency review (vulnerabilities, licences, Scorecard of new dependencies) | ✓ | |
 | OSV-Scanner | new vulnerabilities only | whole lockfile |
 | `pnpm audit` | | ✓ |
-| CodeQL (TypeScript, Actions) | `security-extended` | `security-and-quality` |
+| CodeQL (TypeScript, Actions), `security-and-quality` | ✓ (and on every push to main) | weekly |
 | zizmor | ✓ | ✓ with online audits |
 | gitleaks | commits of the PR | full history |
 | OpenSSF Scorecard | | ✓ |

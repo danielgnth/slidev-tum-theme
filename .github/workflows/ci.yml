@@ -77,8 +77,9 @@ jobs:
           path: dist/*.tgz
           retention-days: 7
 
-  export:
-    # renders every slide in Chromium: catches runtime errors the build cannot see
+  render:
+    # renders every slide in Chromium (PDF export and docs screenshots): catches
+    # runtime errors the build cannot see, then builds the docs with the fresh screenshots
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -87,34 +88,23 @@ jobs:
         with:
           persist-credentials: false
       - uses: ./.github/actions/setup
+        with:
+          tools: node pnpm python uv pipx:zensical
       - run: pnpm exec playwright install --with-deps chromium
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '0'
       - run: pnpm run export
+      - run: pnpm run docs:build
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: showcase-pdf
           path: dist/showcase.pdf
           retention-days: 7
 
-  docs:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: ./.github/actions/setup
-        with:
-          tools: python uv pipx:zensical
-          install-deps: 'false'
-      - run: zensical build --clean --strict
-
   # single required status check for branch protection
   ci-ok:
     if: always()
-    needs: [lint, typecheck, test, build, export, docs]
+    needs: [lint, typecheck, test, build, render]
     runs-on: ubuntu-latest
     permissions: {}
     steps:

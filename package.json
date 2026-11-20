@@ -26,8 +26,9 @@
     "test:watch": "vitest",
     "test:package": "bash scripts/smoke-test-package.sh dist/slidev-theme-tum-*.tgz",
     "check": "pnpm run lint && pnpm run typecheck && pnpm run test",
-    "docs:dev": "zensical serve",
-    "docs:build": "zensical build --clean",
+    "docs:screens": "node scripts/docs-screenshots.js",
+    "docs:dev": "pnpm run docs:screens && zensical serve",
+    "docs:build": "pnpm run docs:screens && zensical build --clean --strict",
     "release": "release-it"
   },
   "devDependencies": {
@@ -36,6 +37,7 @@
     "@release-it/conventional-changelog": "^12.0.0",
     "@slidev/cli": "^53.1.0",
     "@slidev/client": "^53.1.0",
+    "@slidev/parser": "53.1.0",
     "@slidev/types": "^53.1.0",
     "@types/node": "^26.0.0",
     "@vitejs/plugin-vue": "^6.0.11",
