@@ -5,7 +5,7 @@ description: Write or edit Slidev presentations in the TUM corporate design with
 
 # Slidev decks with slidev-theme-tum
 
-The theme follows the TUM corporate design (16:9, 980 px canvas) and the `tumbeamer` LaTeX class. Write plain Slidev Markdown; pick a layout per slide in its frontmatter. Full docs: https://danielgnth.github.io/slidev-tum-theme/
+The theme follows the TUM corporate design (16:9, 960 px canvas) and the `tumbeamer` LaTeX class. Write plain Slidev Markdown; pick a layout per slide in its frontmatter. Full docs: https://danielgnth.github.io/slidev-tum-theme/
 
 ## Headmatter
 

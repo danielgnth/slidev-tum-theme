@@ -43,7 +43,7 @@
     "highlighter": "shiki",
     "defaults": {
       "aspectRatio": "16/9",
-      "canvasWidth": 980,
+      "canvasWidth": 960,
       "fonts": {
         "sans": "TUM Neue Helvetica,Helvetica Neue,Helvetica,Arial",
         "mono": "JetBrains Mono,SF Mono,Menlo,Consolas,monospace",
