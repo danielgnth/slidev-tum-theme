@@ -207,6 +207,9 @@ layout: references
 
 Use a bullet list with `[n]` labels for a hanging indent, or a numbered list.
 
+!!! warning "`mdc: true` swallows square brackets"
+    With Slidev's MDC syntax enabled (`mdc: true` in the headmatter), `[1]` becomes a `<span>`: reference labels lose their brackets and footnotes (`[^1]`) stop working. Leave `mdc` off, or write the labels as `\[1\]`.
+
 ### `end`
 
 ```md

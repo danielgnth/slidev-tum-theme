@@ -82,6 +82,7 @@ Leave an empty line after `<Block …>` when its body is Markdown.
 - Images go in `public/` next to `slides.md` and are referenced from the root: `/images/setup.svg`.
 - Mermaid diagrams are themed in TUM colours automatically; prefer `layout: diagram` for a diagram that should fill the slide.
 - Tables render booktabs-style; keep them under ~8 rows.
+- Do not set `mdc: true`: it turns `[1]` into a span, so `references` labels lose their brackets and footnotes (`[^1]`) break. If a deck needs MDC, write labels as `\[1\]`.
 
 ## Writing good TUM slides
 

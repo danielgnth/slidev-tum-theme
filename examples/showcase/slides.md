@@ -21,7 +21,6 @@ themeConfig:
   # university: Technical University of Munich
   # footer: false               # or a custom string
   # figureNumbers: false
-mdc: true
 transition: none
 # slides with a routeAlias are rendered as docs screenshots (scripts/docs-screenshots.js)
 routeAlias: cover
