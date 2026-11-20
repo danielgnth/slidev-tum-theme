@@ -32,6 +32,10 @@ run = [
   "pnpm install --frozen-lockfile",
 ]
 
+[tasks.release]
+description = "Tag the next version on main and create its GitHub release (see docs/development/releasing.md)"
+run = 'GITHUB_TOKEN="${GITHUB_TOKEN:-$(gh auth token)}" pnpm run release'
+
 [tasks.check]
 description = "Everything CI runs on a pull request, locally"
 run = [

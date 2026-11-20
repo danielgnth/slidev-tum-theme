@@ -1,0 +1,16 @@
+# SLSA source track: provenance and a VSA for every revision of main, stored in
+# the commit's git notes. release.yml verifies them before publishing a tag.
+name: SLSA source
+
+on:
+  push:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  source-provenance:
+    permissions:
+      contents: write # stores the attestations in git notes
+      id-token: write
+    uses: slsa-framework/actions/.github/workflows/compute_slsa_source.yml@3efdf6f2112b1170cb369442620788752df11bca # v0.2.0

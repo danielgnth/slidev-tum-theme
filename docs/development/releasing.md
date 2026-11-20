@@ -1,6 +1,6 @@
 # Releasing
 
-Releases go through a pull request, so `main` can stay protected. The release workflow publishes from CI only: no npm token exists anywhere.
+Versions are git tags. `theme/package.json` carries a placeholder version (`0.0.0-development`); the release workflow writes the version from the tag into the package it builds. The GitHub releases are the changelog. Only CI publishes; no npm token exists anywhere.
 
 ```mermaid
 sequenceDiagram
@@ -10,47 +10,45 @@ sequenceDiagram
   participant CI as release.yml
   participant NPM as npm
 
-  M->>R: pnpm release
+  M->>R: mise run release
   R->>R: lint, typecheck, test
-  R->>GH: push release/vX.Y.Z (version bump + CHANGELOG)
-  R->>GH: open pull request
-  M->>GH: review and merge
-  GH->>CI: push to main
-  CI->>CI: SLSA source provenance (git notes)
-  CI->>CI: verify source level of the commit
-  CI->>CI: pack tarball
+  R->>GH: push tag vX.Y.Z (on main)
+  R->>GH: GitHub release with the changelog
+  GH->>CI: tag push
+  CI->>CI: tagged commit is on main?
+  CI->>CI: verify its SLSA source provenance
+  CI->>CI: pack tarball with version X.Y.Z
   CI->>CI: SLSA build provenance (attester, Build L3)
   CI->>CI: verify build provenance
   CI->>NPM: npm publish (trusted publishing + npm provenance)
-  CI->>GH: tag vX.Y.Z, GitHub release with tarball + attestations.intoto.jsonl
+  CI->>GH: attach tarball + attestations.intoto.jsonl to the release
 ```
 
 ## Cutting a release
 
 ```bash
 git switch main && git pull
-pnpm release          # or: pnpm release minor | major | 1.2.3 | --dry-run
+mise run release          # or: mise run release -- minor | major | 1.2.3 | --dry-run
 ```
 
-[release-it](https://github.com/release-it/release-it):
+`mise run release` runs [release-it](https://github.com/release-it/release-it) with a GitHub token from `gh auth token`. release-it:
 
 1. runs lint, typecheck and tests,
 2. derives the next version from the Conventional Commits since the last tag (`feat` → minor, `fix` → patch, `!` → major),
-3. bumps `theme/package.json` and prepends the section to `CHANGELOG.md`,
-4. commits `chore(release): vX.Y.Z` on a new branch `release/vX.Y.Z` and pushes it,
-5. opens the pull request with `gh` (or prints what to open).
+3. creates the annotated tag `vX.Y.Z` on the current commit of `main` and pushes it,
+4. creates the GitHub release with the changelog of those commits.
 
-Merging the pull request publishes: a push to `main` whose commit title is `chore(release): vX.Y.Z` and whose version has no tag yet is a release. Squash-merge keeps that title. `workflow_dispatch` releases the current version manually if it is not tagged yet.
+Nothing is committed and `main` stays protected: only the tag is pushed. The tag starts `release.yml`, which publishes to npm and attaches the tarball and its provenance to the release.
 
 ## What the workflow guarantees
 
 | Track | Evidence | Where |
 |---|---|---|
-| SLSA **Source** | source provenance and VSA for every revision of `main`, signed by the official `slsa-framework/actions` workflow | git notes of the commit |
+| SLSA **Source** | source provenance and VSA for every revision of `main` (`slsa-source.yml`), signed by the official `slsa-framework/actions` workflow | git notes of the commit |
 | SLSA **Build** L3 | provenance of the tarball by the [SLSA attester](https://github.com/slsa-framework/attester), observed from a separate job and signed by `attest_actions.yml` | release asset `attestations.intoto.jsonl` |
 | npm provenance | Sigstore-signed statement linking the package to the workflow run | npmjs.com package page |
 
-The publish job verifies the source level of the commit and the build provenance of the exact tarball **before** `npm publish`, so an unverified artifact never reaches the registry.
+The workflow refuses tags that are not on `main`, and verifies the source level of the tagged commit and the build provenance of the exact tarball **before** `npm publish`, so an unverified artifact never reaches the registry.
 
 ## Verifying a release
 
@@ -87,7 +85,7 @@ slsa-verifier source source.intoto.jsonl "$commit" \
 
     `--provenance=false` is needed because `publishConfig.provenance` is on, and npm can only create provenance inside CI. Outside CI it fails with `Automatic provenance generation not supported for provider: null`, which also guards against accidental local publishes later. This first version has no provenance; every release after it does.
 2. **Trusted publisher.** On npmjs.com → package → *Settings* → *Trusted publishing*: GitHub Actions, repository `danielgnth/slidev-tum-theme`, workflow `release.yml`, environment `npm`. Then set *Publishing access* to "Require two-factor authentication and disallow tokens".
-3. **Environment.** In the GitHub repository settings, create the environment `npm` and limit it to the `main` branch. Add required reviewers if releases should need a second approval.
-4. **Branch ruleset for `main`.** Block force pushes and deletions, require pull requests and the `ci-ok` status check. The SLSA source track measures these controls: Source L2 needs continuous, immutable history, L3 needs them enforced.
+3. **Environment.** The environment `npm` only accepts deployments from tags matching `v*` (repository settings → *Environments*). Add required reviewers if releases should need a second approval.
+4. **Rulesets.** Tags `v*` cannot be moved or deleted. For `main`: Block force pushes and deletions, require pull requests and the `ci-ok` status check. The SLSA source track measures these controls: Source L2 needs continuous, immutable history, L3 needs them enforced.
 5. **Source level.** The release requires Source level 2 by default. Once the ruleset is in place, set the repository variable `SLSA_SOURCE_LEVEL` to `3`.
 6. **Pages.** *Settings* → *Pages* → Source: GitHub Actions.
