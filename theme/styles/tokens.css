@@ -1,7 +1,9 @@
 /*
  * Design tokens of the TUM theme (16:9).
- * Geometry is measured from the official TUM title slide, scaled to the 980 px
- * Slidev canvas: side margin 34 px, top margin 30 px, logo 34 px high.
+ * Geometry follows the official TUM title slide: side margin 34 px, top margin
+ * 30 px, logo 34 px high. The canvas is 960 px wide (package.json), so Slidev
+ * scales it by clean factors (2x on 1920x1080, 1.5x on 1440x900) and edges land
+ * on whole pixels; with Slidev's default 980 px every edge is blurred.
  */
 
 :root {

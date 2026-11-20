@@ -45,7 +45,7 @@ flowchart LR
 
 ## Styles
 
-The CSS is plain, global and ordered (`styles/index.ts`). Tokens (colours, geometry, type sizes) are CSS variables in `tokens.css`, so decks can override them. Geometry follows the official TUM title slide scaled to the 980 px canvas.
+The CSS is plain, global and ordered (`styles/index.ts`). Tokens (colours, geometry, type sizes) are CSS variables in `tokens.css`, so decks can override them. Geometry follows the official TUM title slide. The canvas is 960 px wide rather than Slidev's default 980 px: 960 scales to common screens by clean factors (2× on 1920×1080, 1.5× on a 1440×900 Retina display), so edges land on whole device pixels. At 980 px the scale is 1.959 and every edge is smeared across two pixels. The TUM logo additionally uses `shape-rendering: crispEdges`, because its bars never fall on whole pixels at slide sizes.
 
 `colors.ts` is the single source of the palette. `tokens.css` repeats the subset it needs, and a test keeps the two in sync.
 

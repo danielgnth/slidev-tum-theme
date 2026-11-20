@@ -18,6 +18,7 @@ withDefaults(defineProps<{
   <svg
     class="tum-logo"
     viewBox="0 0 1897 1000"
+    shape-rendering="crispEdges"
     :style="{ height: typeof height === 'number' ? `${height}px` : height, color }"
     role="img"
     aria-label="TUM"
