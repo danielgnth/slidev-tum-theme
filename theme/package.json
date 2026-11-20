@@ -3,6 +3,8 @@
   "type": "module",
   "version": "0.1.0",
   "description": "Slidev theme in the TUM (Technical University of Munich) corporate design, with the layouts of the tumbeamer LaTeX class",
+  "author": "Daniel Günther",
+  "license": "MIT",
   "homepage": "https://danielgnth.github.io/slidev-tum-theme/",
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
   ],
   "files": [
     "*.ts",
+    "NOTICE.md",
     "assets",
     "components",
     "composables",

@@ -212,7 +212,7 @@ Use a bullet list with `[n]` labels for a hanging indent, or a numbered list.
 ```md
 ---
 layout: end
-email: max.mustermann@tum.de
+email: max.mustermann@example.org
 web: www.tum.de
 ---
 ```

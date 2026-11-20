@@ -53,4 +53,5 @@ To look at slides: `pnpm exec slidev export examples/showcase/slides.md --format
 - **Commits / PR titles**: Conventional Commits (`feat(layouts): …`). They generate the changelog and the version.
 - **Workflows**: pin actions by full SHA with a `# vX.Y.Z` comment, `permissions: {}` at the top, least privilege per job, `persist-credentials: false`. Run `pnpm lint:actions`.
 - **Releases** happen only through `pnpm release` → PR → `release.yml`. Never publish to npm by hand, never edit versions or CHANGELOG.md manually.
-- `theme/assets/uhrenturm.png` and the logo path in `TumLogo.vue` are TUM corporate design assets: do not modify them.
+- `theme/assets/uhrenturm.png` and the logo path in `TumLogo.vue` are TUM corporate design assets, excluded from the MIT licence (`NOTICE.md`): do not modify them, and do not add other TUM assets without updating `NOTICE.md`.
+- Example content uses fictional names ("Chair of Imaginary Systems", Max Mustermann, `@example.org`), never real chairs or people.
