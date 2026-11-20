@@ -40,7 +40,7 @@ pnpm release          # or: pnpm release minor | major | 1.2.3 | --dry-run
 4. commits `chore(release): vX.Y.Z` on a new branch `release/vX.Y.Z` and pushes it,
 5. opens the pull request with `gh` (or prints what to open).
 
-Merging the pull request publishes. A push to `main` whose `theme/package.json` version has no tag yet is a release.
+Merging the pull request publishes: a push to `main` whose commit title is `chore(release): vX.Y.Z` and whose version has no tag yet is a release. Squash-merge keeps that title. `workflow_dispatch` releases the current version manually if it is not tagged yet.
 
 ## What the workflow guarantees
 
