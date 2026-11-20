@@ -146,9 +146,7 @@ jobs:
       - name: Publish to npm
         env:
           TARBALL: ${{ steps.tarball.outputs.path }}
-        run: |
-          npm --version
-          npm publish "$TARBALL" --access public --provenance
+        run: scripts/publish-package.sh "$TARBALL" --provenance
 
   release-assets:
     needs: [check, publish]

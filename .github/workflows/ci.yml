@@ -71,6 +71,9 @@ jobs:
           fi
       - name: Install the package into a fresh Slidev project
         run: scripts/smoke-test-package.sh dist/slidev-theme-tum-*.tgz
+      - name: npm publish, dry run (the command release.yml runs)
+        # --tag: the placeholder version 0.0.0-development is a prerelease
+        run: scripts/publish-package.sh dist/slidev-theme-tum-*.tgz --dry-run --provenance=false --tag ci
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: package
