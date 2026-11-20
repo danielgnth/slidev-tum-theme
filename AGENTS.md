@@ -52,7 +52,7 @@ To look at slides: `pnpm exec slidev export examples/showcase/slides.md --format
 - **Style**: @antfu/eslint-config (no semicolons, single quotes). Match the comment density of the surrounding code.
 - **Commits / PR titles**: Conventional Commits (`feat(layouts): …`). They generate the changelog and the version.
 - **Workflows**: pin actions by full SHA with a `# vX.Y.Z` comment, `permissions: {}` at the top, least privilege per job, `persist-credentials: false`. Run `pnpm lint:actions`.
-- **Releases** happen only through `pnpm release` → PR → `release.yml`. Never publish to npm by hand, never edit versions or CHANGELOG.md manually.
+- **Releases** are git tags: `mise run release` (release-it) tags `main` and creates the GitHub release, the tag runs `release.yml`. `theme/package.json` keeps the placeholder version `0.0.0-development`; never edit it, never create version tags by hand, never publish to npm by hand.
 - `theme/assets/uhrenturm.png` and the logo path in `TumLogo.vue` are TUM corporate design assets, excluded from the MIT licence (`NOTICE.md`): do not modify them, and do not add other TUM assets without updating `NOTICE.md`.
 - **Docs screenshots** are generated, never committed: showcase slides with a `routeAlias` are rendered to `docs/assets/screens/<alias>.png` by `pnpm docs:screens` (part of `docs:build`). To add one, give the slide a `routeAlias` and reference `assets/screens/<alias>.png`.
 - Example content uses fictional names ("Chair of Imaginary Systems", Max Mustermann, `@example.org`), never real chairs or people.

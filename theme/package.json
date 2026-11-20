@@ -1,7 +1,7 @@
 {
   "name": "slidev-theme-tum",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "description": "Slidev theme in the TUM (Technical University of Munich) corporate design, with the layouts of the tumbeamer LaTeX class",
   "author": "Daniel Günther",
   "license": "MIT",

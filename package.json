@@ -33,7 +33,6 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^10.0.0",
-    "@release-it/bumper": "^8.0.1",
     "@release-it/conventional-changelog": "^12.0.0",
     "@slidev/cli": "^53.1.0",
     "@slidev/client": "^53.1.0",

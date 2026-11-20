@@ -27,6 +27,7 @@ pnpm dev                         # showcase deck on http://localhost:3030
 | `pnpm docs:screens` | render the docs screenshots from the showcase slides that have a `routeAlias` (needs Chromium) |
 | `pnpm docs:dev` / `pnpm docs:build` | this site (Zensical), screenshots included |
 | `mise run check` | everything CI runs on a pull request |
+| `mise run release` | tag the next version on `main` and create its GitHub release; CI publishes it ([Releasing](releasing.md)) |
 
 ## Git hooks
 
@@ -53,5 +54,6 @@ Skip them once with `LEFTHOOK=0 git commit …`.
 | `codeql.yml` | PR, push to main, weekly | CodeQL for TypeScript and Actions; the push runs are the baseline for PR results |
 | `security-pr.yml` | PR | dependency review, OSV-Scanner (new vulns), zizmor, gitleaks |
 | `security-nightly.yml` | daily | OSV-Scanner, `pnpm audit`, zizmor (online), gitleaks (full history), OpenSSF Scorecard |
-| `release.yml` | push to main | SLSA source provenance; publishes when the version changed: see [Releasing](releasing.md) |
+| `slsa-source.yml` | push to main | SLSA source provenance for every revision, stored in git notes |
+| `release.yml` | tag `vX.Y.Z` | verifies, builds, attests and publishes that version: see [Releasing](releasing.md) |
 | `docs.yml` | push to main (`docs/`, `theme/`, `examples/showcase/`) | this site on GitHub Pages, screenshots rendered from the showcase deck |

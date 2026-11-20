@@ -9,7 +9,6 @@ export default antfu({
     'dist/**',
     'site/**',
     '**/.slidev/**',
-    'CHANGELOG.md',
     'mise.lock',
     '.mise/**',
   ],
