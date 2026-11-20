@@ -1,0 +1,42 @@
+{
+  "$schema": "https://unpkg.com/release-it@21/schema/release-it.json",
+  "git": {
+    "requireBranch": "main",
+    "requireCleanWorkingDir": true,
+    "requireCommits": true,
+    "commitMessage": "chore(release): v${version}",
+    "tagName": "v${version}",
+    "tag": false,
+    "push": true
+  },
+  "npm": {
+    "publish": false,
+    "ignoreVersion": true
+  },
+  "github": {
+    "release": false
+  },
+  "plugins": {
+    "@release-it/bumper": {
+      "in": "theme/package.json",
+      "out": "theme/package.json"
+    },
+    "@release-it/conventional-changelog": {
+      "preset": {
+        "name": "conventionalcommits"
+      },
+      "infile": "CHANGELOG.md",
+      "header": "# Changelog"
+    }
+  },
+  "hooks": {
+    "before:init": [
+      "git pull --ff-only",
+      "pnpm run lint",
+      "pnpm run typecheck",
+      "pnpm run test"
+    ],
+    "after:bump": "git switch -c release/v${version}",
+    "after:release": "gh pr create --base main --head release/v${version} --title 'chore(release): v${version}' --body 'Merging this pull request publishes v${version} to npm (see docs/development/releasing.md).' || echo 'Open a pull request for release/v${version} into main to publish v${version}.'"
+  }
+}

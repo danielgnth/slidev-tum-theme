@@ -1,0 +1,120 @@
+/* cover and end: left-aligned title block, Uhrenturm on the right */
+
+.tum-layout-end .tum-body {
+  justify-content: safe center;
+  padding-top: 24px;
+}
+
+/* cover: the bottom group (author … date) has a fixed position, the title group
+   above it grows upwards */
+.tum-layout-cover .tum-cover {
+  height: 100%;
+}
+
+.tum-cover__head {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.tum-cover__foot {
+  flex: none;
+  margin-top: 52px; /* title group → author */
+  padding-bottom: 32px; /* date → bottom margin */
+}
+
+.tum-cover {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 60%;
+  position: relative;
+  z-index: 1;
+}
+
+/* :where keeps this reset weaker than the margins of the individual lines below */
+.tum-frame .tum-cover :where(p) {
+  margin: 0;
+  line-height: 1.3;
+}
+
+.tum-frame h1.tum-cover__title {
+  font-size: 40px;
+  line-height: 1.2;
+  font-weight: 700;
+  margin: 0;
+}
+
+.tum-frame .tum-cover__subtitle {
+  margin-top: 10px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--tum-blue);
+}
+
+.tum-frame .tum-cover__thesis {
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--tum-blue);
+}
+
+.tum-frame .tum-cover__author {
+  margin-top: 0;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.tum-frame .tum-cover__advisor {
+  margin-top: 4px;
+  font-size: 15px;
+}
+
+.tum-cover__extra {
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+.tum-cover__org {
+  margin-top: 18px;
+  font-size: 18px;
+}
+
+.tum-frame .tum-cover__date {
+  margin-top: 36px;
+  font-size: 21px;
+}
+
+.tum-frame .tum-cover__venue {
+  margin-top: 4px;
+  font-size: 15px;
+}
+
+/* the PNG has empty space above the drawing; this places the drawing like the
+   official title slide: right edge on the logo, about half the slide wide */
+.tum-tower {
+  position: absolute;
+  right: var(--tum-mx);
+  bottom: -11px;
+  width: 46.5%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tum-frame .tum-end h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.tum-end__contact {
+  margin-top: 30px;
+  font-size: 18px;
+}
+
+.tum-frame .tum-end__contact .tum-cover__author {
+  margin-top: 0;
+  margin-bottom: 4px;
+}

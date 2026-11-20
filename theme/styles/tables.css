@@ -1,0 +1,32 @@
+/* booktabs: thick top/bottom rule, thin mid rule, no vertical lines */
+
+.tum-frame table {
+  width: auto;
+  min-width: 60%;
+  margin: 0.6em auto;
+  border-collapse: collapse;
+  font-size: var(--tum-fs-small);
+  border-top: 2px solid var(--tum-text);
+  border-bottom: 2px solid var(--tum-text);
+}
+
+.tum-frame thead tr {
+  border-bottom: 1px solid var(--tum-text);
+}
+
+.tum-frame tbody tr {
+  border-bottom: none;
+}
+
+.tum-frame tbody tr:nth-child(even) {
+  background: #f6f8fb;
+}
+
+.tum-frame th {
+  font-weight: 700;
+}
+
+.tum-frame td,
+.tum-frame th {
+  padding: 0.3em 0.8em;
+}

@@ -1,0 +1,22 @@
+name: Bug report
+description: A layout, component or option does not work as documented
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happens, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: slide
+    attributes:
+      label: Minimal slide that shows it
+      render: markdown
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: slidev-theme-tum and @slidev/cli versions
+      placeholder: slidev-theme-tum 0.2.0, @slidev/cli 53.1.0

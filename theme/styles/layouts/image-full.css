@@ -1,0 +1,42 @@
+/* full-bleed photo with white logo (does not use the frame) */
+
+.slidev-layout.tum-layout-image-full {
+  position: relative;
+  padding: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.tum-image-full__logo {
+  position: absolute;
+  top: var(--tum-mt);
+  right: var(--tum-mx);
+}
+
+.tum-image-full__content {
+  position: absolute;
+  left: var(--tum-mx);
+  right: 30%;
+  bottom: calc(var(--tum-mb) + 2.2em);
+}
+
+.tum-image-full__content h1 {
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.tum-image-full__content p {
+  margin: 0.3em 0 0;
+  font-size: 19px;
+}
+
+.tum-image-full__caption {
+  position: absolute;
+  right: var(--tum-mx);
+  bottom: var(--tum-mb);
+  font-size: 11px;
+  opacity: 0.85;
+}

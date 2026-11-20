@@ -1,0 +1,57 @@
+/* center, fact, statement, quote: one big message */
+
+.tum-centered {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+  align-items: center;
+  text-align: center;
+}
+
+.tum-frame .tum-fact h1 {
+  font-size: 88px;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0 0 0.15em;
+}
+
+.tum-frame .tum-fact p {
+  font-size: 22px;
+  color: var(--tum-muted);
+}
+
+.tum-frame .tum-statement h1 {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  max-width: 85%;
+}
+
+.tum-frame .tum-statement p {
+  font-size: 22px;
+}
+
+.tum-quote {
+  padding: 0 4rem;
+}
+
+.tum-quote__mark {
+  font-size: 110px;
+  line-height: 0.6;
+  height: 0.45em;
+  color: var(--tum-light-blue);
+  font-family: Georgia, serif;
+}
+
+.tum-quote__text,
+.tum-frame .tum-quote__text p {
+  font-size: 28px;
+  line-height: 1.35;
+}
+
+.tum-quote__source {
+  margin-top: 1em;
+  font-size: 17px;
+  color: var(--tum-blue);
+}

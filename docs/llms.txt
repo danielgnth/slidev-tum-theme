@@ -1,0 +1,19 @@
+# slidev-theme-tum
+
+> Slidev theme in the corporate design of the Technical University of Munich (TUM), 16:9, with the layouts of the tumbeamer LaTeX class. Install with `npm i -D slidev-theme-tum` and set `theme: tum` in the headmatter of slides.md.
+
+The npm package contains an agent skill with the complete reference: `node_modules/slidev-theme-tum/skills/slidev-tum/SKILL.md`.
+
+## Guide
+
+- [Getting started](https://danielgnth.github.io/slidev-tum-theme/getting-started/): install, first deck, images, PDF export, fonts
+- [Configuration](https://danielgnth.github.io/slidev-tum-theme/configuration/): headmatter of the title slide, themeConfig options, per-slide header/footer
+- [Layouts](https://danielgnth.github.io/slidev-tum-theme/layouts/): cover, default, section, toc, two-cols, three-cols, image, image-left, image-right, image-full, gallery, diagram, fact, statement, quote, center, references, end
+- [Components](https://danielgnth.github.io/slidev-tum-theme/components/): Block, Figure, Caption, Yes, No, Maybe, TumLogo
+- [Styling](https://danielgnth.github.io/slidev-tum-theme/styling/): TUM palette as UnoCSS utilities, CSS variables, Mermaid colours
+
+## Optional
+
+- [Writing slides with AI](https://danielgnth.github.io/slidev-tum-theme/ai/)
+- [Development](https://danielgnth.github.io/slidev-tum-theme/development/): repository layout, checks, releases
+- [Source](https://github.com/danielgnth/slidev-tum-theme)

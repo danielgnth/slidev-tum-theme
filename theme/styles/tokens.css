@@ -1,0 +1,60 @@
+/*
+ * Design tokens of the TUM theme (16:9).
+ * Geometry is measured from the official TUM title slide, scaled to the 980 px
+ * Slidev canvas: side margin 34 px, top margin 30 px, logo 34 px high.
+ */
+
+:root {
+  /* colors: subset of colors.ts (full palette as utilities: text-tum-blue, bg-tum-orange, …) */
+  --tum-blue: #0065bd;
+  --tum-darker-blue: #005293;
+  --tum-dark-blue: #003359;
+  --tum-light-blue: #98c6ea;
+  --tum-lighter-blue: #64a0c8;
+  --tum-orange: #e37222;
+  --tum-green: #a2ad00;
+  --tum-ivory: #dad7cb;
+  --tum-dark-gray: #333333;
+  --tum-gray: #808080;
+  --tum-light-gray: #cccccc;
+  --tum-red: #c4071b;
+  --tum-darker-green: #679a1d;
+
+  --tum-text: #000000;
+  --tum-muted: #5e5e5e;
+  --tum-tint: #f2f6fb;
+
+  /* geometry */
+  --tum-logo-h: 34px;
+  --tum-logo-w: calc(var(--tum-logo-h) * 1.897);
+  --tum-mx: 34px; /* left/right margin */
+  --tum-mt: 30px; /* top margin */
+  --tum-mb: 16px; /* bottom edge to footer */
+  --tum-footer-h: 11px;
+  --tum-header-gap: 22px;
+
+  /* type */
+  --tum-fs-body: 18px;
+  --tum-fs-title: 24px;
+  --tum-fs-subtitle: 18px;
+  --tum-fs-small: 14.5px;
+  --tum-fs-footer: 9.5px;
+  --tum-title-weight: 700;
+
+  /* Slidev */
+  --slidev-theme-primary: var(--tum-blue);
+  --slidev-code-background: #f4f4f4;
+  --slidev-code-font-size: 14px;
+  --slidev-code-line-height: 20px;
+}
+
+/* Slidev's layouts-base.css (normally pulled in by theme-default) is not used,
+   so the layout root needs its size set here */
+.slidev-layout {
+  width: 100%;
+  height: 100%;
+  color: var(--tum-text);
+  background: white;
+  font-size: var(--tum-fs-body);
+  line-height: 1.45;
+}

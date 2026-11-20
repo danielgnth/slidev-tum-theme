@@ -1,0 +1,83 @@
+[project]
+site_name = "slidev-theme-tum"
+site_description = "Slidev theme in the TUM corporate design"
+site_url = "https://danielgnth.github.io/slidev-tum-theme/"
+repo_url = "https://github.com/danielgnth/slidev-tum-theme"
+repo_name = "danielgnth/slidev-tum-theme"
+edit_uri = "edit/main/docs/"
+docs_dir = "docs"
+site_dir = "site"
+extra_css = [ "assets/extra.css" ]
+nav = [
+  { Home = "index.md" },
+  { Guide = [
+    "getting-started.md",
+    "configuration.md",
+    "layouts.md",
+    "components.md",
+    "styling.md",
+    "ai.md",
+  ] },
+  { Development = [
+    "development/index.md",
+    "development/architecture.md",
+    "development/releasing.md",
+    "development/security.md",
+  ] },
+]
+
+[project.theme]
+language = "en"
+features = [
+  "content.code.annotate",
+  "content.code.copy",
+  "content.tabs.link",
+  "navigation.footer",
+  "navigation.indexes",
+  "navigation.instant",
+  "navigation.path",
+  "navigation.sections",
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+]
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "custom"
+accent = "custom"
+
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "custom"
+accent = "custom"
+
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to light mode"
+
+[project.markdown_extensions]
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+md_in_html = {}
+tables = {}
+
+toc.permalink = true
+
+pymdownx.details = {}
+
+pymdownx.highlight.anchor_linenums = true
+
+pymdownx.inlinehilite = {}
+pymdownx.keys = {}
+pymdownx.snippets = {}
+
+pymdownx.superfences.custom_fences = [ { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" }, ]
+
+pymdownx.tabbed.alternate_style = true

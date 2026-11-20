@@ -1,0 +1,29 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+site/
+.slidev/
+*.tgz
+slides-export.*
+*.pdf
+
+# tools
+.cache/
+coverage/
+*.log
+.eslintcache
+.stylelintcache
+mise.local.toml
+.env
+.env.*
+
+# editors and OS
+.DS_Store
+.idea/
+.vscode/
+
+# local agent state
+.claude/settings.local.json
+**/.claude/.cc-writes/

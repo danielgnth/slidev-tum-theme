@@ -1,0 +1,204 @@
+/* Markdown content inside a frame: headings, text, lists, code, footnotes */
+
+.tum-frame h1 {
+  font-size: var(--tum-fs-title);
+  font-weight: var(--tum-title-weight);
+  line-height: 1.2;
+  color: var(--tum-blue);
+  margin: 0 0 0.7em;
+  flex: none;
+}
+
+/* compact header: the frame title sits next to the logo with its baseline on the
+   bottom edge of the logo. Only the frame title, not the big headings of
+   cover/section/statement. The fallback margin assumes Helvetica/Arial metrics
+   (baseline ~0.96em below the top of a 1.2 line box). */
+.tum-frame--header-compact .tum-body > h1:first-child,
+.tum-frame--header-compact :is(.tum-stack__head, .tum-cols__header, .tum-split__text, .tum-diagram) > h1:first-child,
+.tum-frame--header-compact .tum-cols__col:first-child > h1:first-child {
+  margin-top: calc(var(--tum-logo-h) - 0.96em);
+  padding-right: calc(var(--tum-logo-w) + 1.5rem);
+}
+
+/* exact: trim the line box to cap height and baseline, so the box bottom is the baseline */
+@supports (text-box: trim-both cap alphabetic) {
+  .tum-frame--header-compact .tum-body > h1:first-child,
+  .tum-frame--header-compact :is(.tum-stack__head, .tum-cols__header, .tum-split__text, .tum-diagram) > h1:first-child,
+  .tum-frame--header-compact .tum-cols__col:first-child > h1:first-child {
+    text-box: trim-both cap alphabetic;
+    margin-top: calc(var(--tum-logo-h) - 1cap);
+    margin-bottom: 0.95em;
+  }
+
+  .tum-frame--header-compact :is(.tum-body, .tum-stack__head, .tum-cols__header, .tum-split__text, .tum-diagram) > h1:first-child + h2 {
+    margin-top: 0.3em;
+  }
+}
+
+.tum-frame h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0.6em 0 0.3em;
+}
+
+/* "## …" directly below the title is a frame subtitle */
+.tum-frame h1 + h2 {
+  font-size: var(--tum-fs-subtitle);
+  font-weight: 400;
+  color: var(--tum-blue);
+  margin: -0.5em 0 0.9em;
+}
+
+.tum-frame h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--tum-blue);
+  margin: 0.6em 0 0.2em;
+}
+
+.tum-frame h4,
+.tum-frame h5,
+.tum-frame h6 {
+  font-size: var(--tum-fs-body);
+  font-weight: 700;
+  margin: 0.5em 0 0.2em;
+  opacity: 1;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.tum-frame p {
+  margin: 0.45em 0;
+  line-height: 1.45;
+}
+
+/* \emph is TUM blue in the LaTeX template */
+.tum-frame em {
+  font-style: normal;
+  color: var(--tum-blue);
+}
+
+.tum-frame strong,
+.tum-frame b {
+  font-weight: 700;
+}
+
+.tum-frame ul,
+.tum-frame ol {
+  margin: 0.35em 0;
+  padding-left: 1.1em;
+}
+
+.tum-frame ul {
+  list-style: square;
+}
+
+.tum-frame ol {
+  list-style: decimal;
+}
+
+.tum-frame ul ul {
+  list-style: square;
+  font-size: 0.94em;
+}
+
+.tum-frame ul ul > li::marker {
+  color: var(--tum-lighter-blue);
+}
+
+.tum-frame li {
+  line-height: 1.45;
+  margin: 0.18em 0;
+}
+
+.tum-frame li::marker {
+  color: var(--tum-blue);
+}
+
+.tum-frame ol > li::marker {
+  font-weight: 700;
+}
+
+.tum-frame a {
+  color: var(--tum-blue);
+  border-bottom: 1px solid currentColor;
+}
+
+.tum-frame blockquote {
+  background: var(--tum-tint);
+  color: var(--tum-text);
+  border-left: 3px solid var(--tum-blue);
+  border-radius: 0;
+  padding: 0.5em 0.9em;
+  font-size: var(--tum-fs-small);
+}
+
+.tum-frame :not(pre) > code {
+  font-size: 0.85em;
+  background: #eef1f5;
+  padding: 0.05em 0.3em;
+  border-radius: 2px;
+}
+
+.tum-frame :not(pre) > code::before {
+  content: none;
+}
+
+.tum-frame .slidev-code-wrapper {
+  margin: 0.5em 0;
+}
+
+.tum-frame pre.slidev-code {
+  border-radius: 0;
+  border-left: 3px solid var(--tum-blue);
+}
+
+.tum-frame .katex {
+  font-size: 1.05em;
+}
+
+/* utility classes usable in markdown: <span class="small">, <div class="muted"> … */
+.tum-frame .small {
+  font-size: var(--tum-fs-small);
+}
+
+.tum-frame .tiny {
+  font-size: 12px;
+}
+
+.tum-frame .muted {
+  color: var(--tum-muted);
+}
+
+/* footnotes ([^1]) sit at the bottom of the frame body */
+
+.tum-frame .footnotes-sep {
+  display: none;
+}
+
+.tum-frame .footnotes {
+  margin-top: auto;
+  padding-top: 0.4em;
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--tum-dark-gray);
+}
+
+.tum-frame .footnotes ol {
+  margin: 0;
+  padding-left: 1.4em;
+}
+
+.tum-frame .footnotes li {
+  margin: 0;
+}
+
+.tum-frame .footnotes p {
+  margin: 0;
+  display: inline;
+}
+
+.tum-frame .footnote-ref a,
+.tum-frame .footnote-backref {
+  border: none;
+}

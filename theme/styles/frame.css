@@ -1,0 +1,94 @@
+/* Frame chrome shared by all content layouts: header, body area, footer (TumFrame.vue) */
+
+.slidev-layout.tum-frame {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+
+.tum-header {
+  position: absolute;
+  top: var(--tum-mt);
+  left: var(--tum-mx);
+  right: var(--tum-mx);
+  height: var(--tum-logo-h);
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  color: var(--tum-blue);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* chair / school / university: three lines filling the logo height */
+.tum-header__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: 11px;
+  line-height: calc(var(--tum-logo-h) / 3);
+  white-space: nowrap;
+}
+
+.tum-header--inverted {
+  color: white;
+}
+
+.tum-body {
+  position: absolute;
+  inset: calc(var(--tum-mt) + var(--tum-logo-h) + var(--tum-header-gap)) var(--tum-mx) calc(var(--tum-mb) + var(--tum-footer-h) + 14px) var(--tum-mx);
+  display: flex;
+  flex-direction: column;
+}
+
+.tum-body > * {
+  flex-shrink: 0;
+}
+
+.tum-frame--header-compact .tum-body,
+.tum-frame--header-none .tum-body {
+  top: var(--tum-mt);
+}
+
+.tum-frame--no-footer .tum-body {
+  bottom: var(--tum-mt);
+}
+
+.tum-footer {
+  position: absolute;
+  left: var(--tum-mx);
+  right: var(--tum-mx);
+  bottom: var(--tum-mb);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2em;
+  font-size: var(--tum-fs-footer);
+  line-height: 1;
+  color: var(--tum-dark-gray);
+  z-index: 2;
+}
+
+.tum-footer__text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  /* room for descenders (g, p, y) inside the clipping box, without moving the text */
+  padding-block: 0.25em;
+  margin-block: -0.25em;
+}
+
+.tum-footer__text sup {
+  font-size: 0.7em;
+}
+
+.tum-footer__page {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.tum-footer--inverted {
+  color: white;
+}

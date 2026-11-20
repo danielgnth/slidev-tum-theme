@@ -1,0 +1,24 @@
+# Supply-chain hardening, see docs/development/security.md
+
+# only install versions that have been public for a week
+minimumReleaseAge: 10080
+minimumReleaseAgeExcludePrune: true
+
+# refuse versions published with weaker trust than earlier ones (lost provenance)
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  # published 2024-11-13, before undici used trusted publishing; via @slidev/cli > pptxgenjs > @types/node@22
+  - undici-types@6.21.0
+
+# package.json scripts behave the same on every OS
+shellEmulator: true
+
+packages:
+  - theme
+
+# no install scripts unless listed here
+allowBuilds:
+  # hooks are installed by the root `prepare` script instead
+  lefthook: false
+  # the browser for `pnpm export` is installed explicitly: pnpm exec playwright install chromium
+  playwright-chromium: false

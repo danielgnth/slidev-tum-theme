@@ -1,0 +1,82 @@
+/* Styles of the public components: <Yes/> <No/> <Maybe/>, <Block> */
+
+.tum-mark {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+.tum-mark--yes {
+  color: var(--tum-darker-green);
+}
+
+.tum-mark--no {
+  color: var(--tum-red);
+}
+
+.tum-mark--maybe {
+  color: var(--tum-orange);
+}
+
+.tum-block {
+  --tum-block-c: var(--tum-blue);
+  --tum-block-bg: #eaf2fa;
+
+  margin: 0.6em 0;
+  font-size: 0.95em;
+}
+
+.tum-block--alert {
+  --tum-block-c: var(--tum-red);
+  --tum-block-bg: #fbecee;
+}
+
+.tum-block--example {
+  --tum-block-c: var(--tum-darker-green);
+  --tum-block-bg: #f1f6e8;
+}
+
+.tum-block--warning {
+  --tum-block-c: var(--tum-orange);
+  --tum-block-bg: #fdf1e8;
+}
+
+.tum-block--note {
+  --tum-block-c: var(--tum-dark-gray);
+  --tum-block-bg: #f2f2f2;
+}
+
+.tum-block__title {
+  background: var(--tum-block-c);
+  color: white;
+  font-weight: 700;
+  padding: 0.25em 0.7em;
+}
+
+.tum-block__body {
+  background: var(--tum-block-bg);
+  padding: 0.45em 0.7em;
+}
+
+.tum-block__body > :first-child {
+  margin-top: 0;
+}
+
+.tum-block__body > :last-child {
+  margin-bottom: 0;
+}
+
+.tum-block--outline .tum-block__title {
+  background: transparent;
+  color: var(--tum-block-c);
+  padding-bottom: 0;
+}
+
+.tum-block--outline {
+  border: 1.5px solid var(--tum-block-c);
+}
+
+.tum-block--outline .tum-block__body {
+  background: transparent;
+}

@@ -1,0 +1,58 @@
+{
+  "name": "slidev-theme-tum",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Slidev theme in the TUM (Technical University of Munich) corporate design, with the layouts of the tumbeamer LaTeX class",
+  "homepage": "https://danielgnth.github.io/slidev-tum-theme/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielgnth/slidev-tum-theme.git",
+    "directory": "theme"
+  },
+  "bugs": "https://github.com/danielgnth/slidev-tum-theme/issues",
+  "keywords": [
+    "slidev-theme",
+    "slidev",
+    "tum",
+    "beamer"
+  ],
+  "files": [
+    "*.ts",
+    "assets",
+    "components",
+    "composables",
+    "layouts",
+    "setup",
+    "skills",
+    "styles",
+    "utils"
+  ],
+  "engines": {
+    "node": ">=22.22.0",
+    "slidev": ">=52.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "slidev": {
+    "colorSchema": "light",
+    "highlighter": "shiki",
+    "defaults": {
+      "aspectRatio": "16/9",
+      "canvasWidth": 980,
+      "fonts": {
+        "sans": "TUM Neue Helvetica,Helvetica Neue,Helvetica,Arial",
+        "mono": "JetBrains Mono,SF Mono,Menlo,Consolas,monospace",
+        "provider": "none"
+      },
+      "themeConfig": {
+        "lang": "en",
+        "header": "compact",
+        "footer": true,
+        "figureNumbers": true,
+        "primary": "#0065BD"
+      }
+    }
+  }
+}

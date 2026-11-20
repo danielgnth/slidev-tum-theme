@@ -1,0 +1,30 @@
+/* bibliography in small type with hanging indent */
+
+.tum-references {
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+
+.tum-references ol,
+.tum-references ul {
+  padding-left: 2em;
+}
+
+.tum-references ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.tum-references ul > li {
+  padding-left: 2.4em;
+  text-indent: -2.4em;
+}
+
+.tum-references li {
+  margin: 0 0 0.45em;
+}
+
+.tum-references em {
+  font-style: italic;
+  color: inherit;
+}

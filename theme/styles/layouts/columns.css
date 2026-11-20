@@ -1,0 +1,52 @@
+/* two-cols, three-cols, image-left, image-right */
+
+.tum-cols {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.tum-cols__header {
+  flex: none;
+}
+
+.tum-cols__grid {
+  display: grid;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.tum-cols__col {
+  min-width: 0;
+}
+
+.tum-cols__col > :first-child,
+.tum-split__text > :first-child {
+  margin-top: 0;
+}
+
+.tum-cols__bottom {
+  flex: none;
+  margin-top: 0.5em;
+}
+
+.tum-split {
+  display: grid;
+  column-gap: 2rem;
+  height: 100%;
+  min-height: 0;
+}
+
+.tum-split__text {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.tum-split--left .tum-split__text {
+  order: 2;
+}
+
+.tum-split--left .tum-split__media {
+  order: 1;
+}

@@ -1,0 +1,44 @@
+# Toolchain pins for local development and CI (jdx/mise-action reads this file).
+# `mise install` once, then every tool below is on PATH inside the repository.
+min_version = "2026.11.0"
+
+[tools]
+node = "26.13.1"
+pnpm = "12.21.0"
+python = "3.14.9"
+uv = "0.13.8"
+# docs site generator (https://zensical.org), installed with uv
+"pipx:zensical" = "0.1.1"
+# linters that are not npm packages
+actionlint = "1.7.12"
+zizmor = "1.31.1"
+gitleaks = "8.30.0"
+
+[settings]
+# install pipx tools with uv instead of pipx
+pipx.uvx = true
+
+# never fetch "latest" behind our back
+not_found_auto_install = false
+
+[env]
+# keep Playwright's browser download out of `pnpm install`
+PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"
+
+[tasks.setup]
+description = "Install toolchain, dependencies and git hooks"
+run = [
+  "mise install",
+  "pnpm install --frozen-lockfile",
+]
+
+[tasks.check]
+description = "Everything CI runs on a pull request, locally"
+run = [
+  "pnpm run lint",
+  "pnpm run lint:actions",
+  "pnpm run typecheck",
+  "pnpm run test",
+  "pnpm run build",
+  "pnpm run docs:build",
+]

@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "jsx": "preserve",
+    "lib": [
+      "ES2023",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "paths": {
+      "@slidev/client": [
+        "./types/slidev-client.d.ts"
+      ]
+    },
+    "resolveJsonModule": true,
+    "types": [
+      "node",
+      "vite/client"
+    ],
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "types/**/*.d.ts",
+    "theme/**/*.ts",
+    "theme/**/*.vue",
+    "test/**/*.ts",
+    "*.config.ts"
+  ]
+}

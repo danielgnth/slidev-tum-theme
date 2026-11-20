@@ -1,0 +1,28 @@
+/* TUM blue for the docs site */
+:root {
+  --md-primary-fg-color: #0065bd;
+  --md-primary-fg-color--light: #64a0c8;
+  --md-primary-fg-color--dark: #005293;
+  --md-accent-fg-color: #e37222;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #005293;
+  --md-accent-fg-color: #98c6ea;
+}
+
+/* slide screenshots */
+.md-typeset img.slide {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 8%);
+}
+
+.md-typeset .grid.slides {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+}
+
+.md-typeset .grid.slides p {
+  margin: 0;
+}

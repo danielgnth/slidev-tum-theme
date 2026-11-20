@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" font-family="Helvetica, Arial, sans-serif">
+  <!-- recreation of tumbeamer/figures/example.tikz: client — router — notebook -->
+  <g stroke="#000" stroke-width="3">
+    <line x1="150" y1="100" x2="270" y2="100"/>
+    <line x1="370" y1="100" x2="490" y2="100"/>
+  </g>
+  <!-- client (desktop) -->
+  <g transform="translate(60 50)">
+    <rect x="0" y="0" width="90" height="64" rx="4" fill="#E1EDF8" stroke="#0065BD" stroke-width="3"/>
+    <rect x="10" y="10" width="70" height="44" fill="#fff" stroke="#0065BD" stroke-width="1.5"/>
+    <rect x="35" y="64" width="20" height="16" fill="#0065BD"/>
+    <rect x="20" y="80" width="50" height="6" fill="#0065BD"/>
+  </g>
+  <!-- router -->
+  <g transform="translate(320 100)">
+    <ellipse cx="0" cy="14" rx="50" ry="18" fill="#005293"/>
+    <rect x="-50" y="-14" width="100" height="28" fill="#005293"/>
+    <ellipse cx="0" cy="-14" rx="50" ry="18" fill="#0065BD" stroke="#005293" stroke-width="2"/>
+    <g stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round">
+      <path d="M-22 -14h-10m6 -5l-6 5 6 5"/>
+      <path d="M22 -14h10m-6 -5l6 5 -6 5"/>
+      <path d="M0 -24v-6m-5 5l5 -5 5 5"/>
+      <path d="M0 -4v6m-5 -5l5 5 5 -5"/>
+    </g>
+  </g>
+  <!-- notebook -->
+  <g transform="translate(490 58)">
+    <rect x="12" y="0" width="76" height="52" rx="3" fill="#E1EDF8" stroke="#0065BD" stroke-width="3"/>
+    <rect x="20" y="8" width="60" height="36" fill="#fff" stroke="#0065BD" stroke-width="1.5"/>
+    <path d="M0 58h100l-8 10H8z" fill="#0065BD"/>
+  </g>
+  <g font-size="18" text-anchor="middle" fill="#000">
+    <text x="105" y="175">Client</text>
+    <text x="320" y="175">Router</text>
+    <text x="540" y="175">Notebook</text>
+  </g>
+</svg>

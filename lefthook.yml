@@ -1,0 +1,32 @@
+# Git hooks, installed by `pnpm install` (prepare script). Skip once with LEFTHOOK=0.
+# Tools not from npm (gitleaks, actionlint, zizmor) come from mise.toml: run `mise install`.
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: eslint
+      glob: '*.{js,ts,vue,json,jsonc,yml,yaml,md,toml}'
+      run: pnpm exec eslint --fix --no-warn-ignored {staged_files}
+      stage_fixed: true
+    - name: stylelint
+      glob: 'theme/**/*.css'
+      run: pnpm exec stylelint --fix {staged_files}
+      stage_fixed: true
+    - name: actionlint
+      glob: '.github/**/*.{yml,yaml}'
+      run: actionlint && zizmor --quiet .github
+    - name: gitleaks
+      run: gitleaks git --staged --no-banner --redact
+
+commit-msg:
+  jobs:
+    - name: conventional commit
+      run: node scripts/check-commit-msg.js {1}
+
+pre-push:
+  parallel: true
+  jobs:
+    - name: typecheck
+      run: pnpm run typecheck
+    - name: test
+      run: pnpm run test

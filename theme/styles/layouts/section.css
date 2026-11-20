@@ -1,0 +1,100 @@
+/* section dividers and the generated outline (toc) */
+
+.tum-layout-section .tum-body {
+  justify-content: safe center;
+}
+
+.tum-section {
+  display: flex;
+  align-items: baseline;
+  gap: 1.4rem;
+}
+
+.tum-section__number {
+  font-size: 72px;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--tum-light-blue);
+  font-variant-numeric: tabular-nums;
+}
+
+.tum-section__content {
+  border-left: 3px solid var(--tum-blue);
+  padding-left: 1.4rem;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+}
+
+.tum-frame .tum-section__content h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.tum-frame .tum-section__content p {
+  font-size: 18px;
+  color: var(--tum-muted);
+  margin: 0.4em 0 0;
+}
+
+.tum-section--blue {
+  background: var(--tum-blue);
+}
+
+.tum-section--blue,
+.tum-frame.tum-section--blue h1,
+.tum-frame.tum-section--blue .tum-section__content p {
+  color: white;
+}
+
+.tum-section--blue .tum-section__number {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.tum-section--blue .tum-section__content {
+  border-left-color: white;
+}
+
+.tum-frame ul.tum-toc {
+  list-style: square;
+  padding-left: 1.1em;
+  margin: 0.2em 0 0;
+  column-gap: 2rem;
+}
+
+.tum-toc li {
+  margin: 0 0 0.55em;
+  break-inside: avoid;
+  cursor: pointer;
+  font-size: 20px;
+  transition: color 0.2s;
+}
+
+/* highlight: the other sections are greyed out */
+.tum-toc li.is-muted {
+  color: #b3b3b3;
+}
+
+.tum-frame .tum-toc li.is-muted::marker {
+  color: var(--tum-light-gray);
+}
+
+.tum-frame ul.tum-toc--numbered {
+  list-style: none;
+  padding-left: 0;
+}
+
+.tum-toc--numbered li {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.tum-toc__no {
+  font-weight: 700;
+  color: var(--tum-blue);
+  font-variant-numeric: tabular-nums;
+  min-width: 1.6em;
+}
