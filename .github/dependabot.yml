@@ -6,6 +6,10 @@ updates:
       interval: weekly
     cooldown:
       default-days: 7
+    ignore:
+      # published without the provenance of its neighbours; refused by pnpm's trustPolicy
+      - dependency-name: lefthook
+        versions: [2.2.2]
     groups:
       slidev:
         patterns: ['@slidev/*', playwright-chromium]

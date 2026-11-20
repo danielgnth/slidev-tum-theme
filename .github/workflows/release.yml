@@ -1,6 +1,6 @@
 # Runs on every push to main:
 #   1. SLSA source track: provenance + VSA for the new revision, stored in git notes
-# and, when theme/package.json carries a version without a tag yet (a merged release PR):
+# and, for a merged release PR (`chore(release): vX.Y.Z`, version not tagged yet) or a manual run:
 #   2. verify the source provenance of the commit
 #   3. pack the npm tarball
 #   4. SLSA build track: provenance for the tarball (slsa-framework attester, Build L3)
@@ -43,14 +43,19 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Is there an unreleased version?
+      - name: Is this a release?
         id: version
         env:
           GH_TOKEN: ${{ github.token }}
+          # first line of the pushed commit: a merged release PR is `chore(release): vX.Y.Z`
+          HEAD_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
           version="$(jq -r .version theme/package.json)"
           echo "version=${version}" >> "$GITHUB_OUTPUT"
-          if gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/v${version}" --silent 2>/dev/null; then
+          if [ "$GITHUB_EVENT_NAME" = "push" ] && [[ "${HEAD_COMMIT_MESSAGE%%$'\n'*}" != "chore(release): v${version}"* ]]; then
+            echo "not a release commit"
+            echo "release=false" >> "$GITHUB_OUTPUT"
+          elif gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/v${version}" --silent 2>/dev/null; then
             echo "v${version} is already released"
             echo "release=false" >> "$GITHUB_OUTPUT"
           else
