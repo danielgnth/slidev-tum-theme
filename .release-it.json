@@ -7,12 +7,9 @@
     "commitMessage": "chore(release): v${version}",
     "tagName": "v${version}",
     "tag": false,
-    "push": true
+    "push": false
   },
-  "npm": {
-    "publish": false,
-    "ignoreVersion": true
-  },
+  "npm": false,
   "github": {
     "release": false
   },
@@ -37,6 +34,9 @@
       "pnpm run test"
     ],
     "after:bump": "git switch -c release/v${version}",
-    "after:release": "gh pr create --base main --head release/v${version} --title 'chore(release): v${version}' --body 'Merging this pull request publishes v${version} to npm (see docs/development/releasing.md).' || echo 'Open a pull request for release/v${version} into main to publish v${version}.'"
+    "after:release": [
+      "git push --set-upstream origin release/v${version}",
+      "gh pr create --base main --head release/v${version} --title 'chore(release): v${version}' --body 'Merging this pull request publishes v${version} to npm (see docs/development/releasing.md).' || echo 'Open a pull request for release/v${version} into main to publish v${version}.'"
+    ]
   }
 }
