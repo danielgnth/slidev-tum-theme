@@ -40,6 +40,14 @@ mise run release          # or: mise run release -- minor | major | 1.2.3 | --dr
 
 Nothing is committed and `main` stays protected: only the tag is pushed. The tag starts `release.yml`, which publishes to npm and attaches the tarball and its provenance to the release.
 
+## Dry run
+
+```bash
+gh workflow run release.yml --ref main
+```
+
+Runs the whole release workflow on the current `main` with a throwaway version (`0.0.0-dry-run.<run>`). The source check, build, smoke test, build attestation and its verification run for real; `npm publish` runs with `--dry-run`, nothing is uploaded, and no npm credentials are used. Run it after changing `release.yml`, before tagging.
+
 ## What the workflow guarantees
 
 | Track | Evidence | Where |

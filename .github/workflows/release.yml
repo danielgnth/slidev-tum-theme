@@ -6,12 +6,15 @@
 #   4. SLSA build track: provenance for the tarball (slsa-framework attester, Build L3)
 #   5. verify that provenance, then publish to npm with trusted publishing (OIDC, npm provenance)
 #   6. attach the tarball and the provenance to the GitHub release
+# Run it by hand (workflow_dispatch) on main for a dry run: every step for real,
+# except that npm publish runs with --dry-run and nothing is uploaded.
 # See docs/development/releasing.md.
 name: Release
 
 on:
   push:
     tags: ['v[0-9]+.[0-9]+.[0-9]+']
+  workflow_dispatch:
 
 permissions: {}
 
@@ -30,17 +33,24 @@ jobs:
       contents: read
     outputs:
       version: ${{ steps.version.outputs.version }}
+      dry-run: ${{ steps.version.outputs.dry-run }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
-      - name: The tagged commit must be on main
+      - name: The commit must be on main
         id: version
         run: |
           git merge-base --is-ancestor "$GITHUB_SHA" origin/main || {
             echo "::error::${GITHUB_REF_NAME} does not point to a commit on main"; exit 1; }
-          echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "version=0.0.0-dry-run.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+            echo "dry-run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+            echo "dry-run=false" >> "$GITHUB_OUTPUT"
+          fi
 
   verify-source:
     needs: [check]
@@ -51,10 +61,21 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Verify the SLSA source level of the tagged commit
+      # A commit carries more than one source provenance when its attestation was
+      # re-run (e.g. after a ruleset change); the verifier needs exactly one.
+      - name: Take the newest source provenance from the commit's git note
+        run: |
+          git fetch --no-tags origin 'refs/notes/commits:refs/notes/commits'
+          git notes show "$GITHUB_SHA" \
+            | jq -c 'select((.dsseEnvelope.payload | @base64d | fromjson | .predicateType)
+                == "https://github.com/slsa-framework/source-tool/source-provenance/v1")' \
+            | tail -n 1 > "$RUNNER_TEMP/source.intoto.jsonl"
+          test -s "$RUNNER_TEMP/source.intoto.jsonl" || { echo "::error::no source provenance for $GITHUB_SHA"; exit 1; }
+      - name: Verify the SLSA source level of the commit
         uses: slsa-framework/actions/verify/source@3efdf6f2112b1170cb369442620788752df11bca # v0.2.0
         with:
-          commit: ${{ github.sha }}
+          attestation: ${{ runner.temp }}/source.intoto.jsonl
+          subject: ${{ github.sha }}
           expected-branch: refs/heads/main
           official: true
           level: ${{ vars.SLSA_SOURCE_LEVEL || '2' }}
@@ -88,8 +109,10 @@ jobs:
           if-no-files-found: error
 
   provenance:
-    # runs in its own job by design: the attester waits for `build` and attests its artifacts
-    needs: [check]
+    # Its own job by design: the attester attests the artifacts of `build`. It must
+    # start after `build` finished; started earlier, it can find `build` still
+    # queued, wait for nothing and attest no artifacts at all.
+    needs: [build]
     permissions:
       id-token: write
       actions: read
@@ -105,7 +128,8 @@ jobs:
     needs: [check, build, provenance]
     runs-on: ubuntu-latest
     environment:
-      name: npm
+      # a dry run gets no environment: no deployment, no npm credentials
+      name: ${{ needs.check.outputs.dry-run == 'true' && 'dry-run' || 'npm' }}
       url: https://www.npmjs.com/package/slidev-theme-tum
     permissions:
       contents: read
@@ -144,12 +168,19 @@ jobs:
           signer: sigstore::https://token.actions.githubusercontent.com::https://github.com/slsa-framework/actions/.github/workflows/attest_actions.yml@${{ env.SLSA_ACTIONS_SHA }}
           level: 3
       - name: Publish to npm
+        if: needs.check.outputs.dry-run != 'true'
         env:
           TARBALL: ${{ steps.tarball.outputs.path }}
         run: scripts/publish-package.sh "$TARBALL" --provenance
+      - name: Publish to npm (dry run)
+        if: needs.check.outputs.dry-run == 'true'
+        env:
+          TARBALL: ${{ steps.tarball.outputs.path }}
+        run: scripts/publish-package.sh "$TARBALL" --dry-run --provenance=false --tag dry-run
 
   release-assets:
     needs: [check, publish]
+    if: needs.check.outputs.dry-run != 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write # uploads to the GitHub release
