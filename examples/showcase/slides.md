@@ -23,6 +23,8 @@ themeConfig:
   # figureNumbers: false
 mdc: true
 transition: none
+# slides with a routeAlias are rendered as docs screenshots (scripts/docs-screenshots.js)
+routeAlias: cover
 ---
 
 ---
@@ -39,6 +41,8 @@ layout: section
 
 Lists, emphasis, math and footnotes
 
+---
+routeAlias: frame
 ---
 
 # Example frame
@@ -81,6 +85,7 @@ A *protocol* defines format and order of messages exchanged between two or more 
 
 ---
 layout: two-cols
+routeAlias: blocks
 ---
 
 # Blocks
@@ -131,6 +136,7 @@ Line highlighting steps through `{2-3|5}` on click.
 
 ---
 layout: section
+routeAlias: section
 ---
 
 # Images & Diagrams
@@ -147,6 +153,7 @@ caption: A small network (recreated from figures/example.tikz)
 
 ---
 layout: image-right
+routeAlias: image-right
 image: /images/measurement.svg
 caption: Measurement setup
 width: 42%
@@ -176,6 +183,7 @@ You can still place a figure anywhere with the component:
 
 ---
 layout: gallery
+routeAlias: gallery
 images:
   - src: /images/setup.svg
     caption: (a) Setup
@@ -205,6 +213,7 @@ flowchart LR
 ---
 layout: diagram
 caption: TCP three-way handshake
+routeAlias: diagram
 ---
 
 # Sequence diagram
@@ -321,6 +330,7 @@ layout: references
 
 ---
 layout: end
+routeAlias: end
 email: max.mustermann@example.org
 web: www.tum.de
 ---

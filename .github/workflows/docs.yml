@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - docs/**
+      - examples/showcase/**
+      - theme/**
+      - scripts/docs-screenshots.js
       - zensical.toml
       - mise.toml
       - .github/workflows/docs.yml
@@ -28,9 +31,12 @@ jobs:
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
       - uses: ./.github/actions/setup
         with:
-          tools: python uv pipx:zensical
-          install-deps: 'false'
-      - run: zensical build --clean --strict
+          tools: node pnpm python uv pipx:zensical
+      - run: pnpm exec playwright install --with-deps chromium
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '0'
+      # screenshots are rendered from examples/showcase on every build
+      - run: pnpm run docs:build
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: site

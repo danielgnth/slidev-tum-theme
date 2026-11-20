@@ -6,7 +6,7 @@
 
 [Slidev](https://sli.dev) theme in the TUM corporate design (16:9), with the layouts and helpers of the `tumbeamer` LaTeX class.
 
-![Title slide](docs/assets/screens/cover.png)
+![Title slide](https://danielgnth.github.io/slidev-tum-theme/assets/screens/cover.png)
 
 **Documentation: https://danielgnth.github.io/slidev-tum-theme/**
 
