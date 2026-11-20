@@ -78,7 +78,14 @@ slsa-verifier source source.intoto.jsonl "$commit" \
 
 ## One-time setup
 
-1. **First publish.** npm can only trust a workflow for a package that exists. Publish `0.0.0` (or the first version) once by hand: `cd theme && npm publish --access public`.
+1. **First publish.** npm can only trust a workflow for a package that exists, so publish the first version once by hand, from an up-to-date `main`:
+
+    ```bash
+    cd theme
+    npm publish --access public --provenance=false
+    ```
+
+    `--provenance=false` is needed because `publishConfig.provenance` is on, and npm can only create provenance inside CI. Outside CI it fails with `Automatic provenance generation not supported for provider: null`, which also guards against accidental local publishes later. This first version has no provenance; every release after it does.
 2. **Trusted publisher.** On npmjs.com → package → *Settings* → *Trusted publishing*: GitHub Actions, repository `danielgnth/slidev-tum-theme`, workflow `release.yml`, environment `npm`. Then set *Publishing access* to "Require two-factor authentication and disallow tokens".
 3. **Environment.** In the GitHub repository settings, create the environment `npm` and limit it to the `main` branch. Add required reviewers if releases should need a second approval.
 4. **Branch ruleset for `main`.** Block force pushes and deletions, require pull requests and the `ci-ok` status check. The SLSA source track measures these controls: Source L2 needs continuous, immutable history, L3 needs them enforced.
