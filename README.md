@@ -23,7 +23,7 @@ title: Something with Networking
 author: Max Mustermann
 themeConfig:
   lang: en # en | de
-  chair: Chair of Network Architectures and Services
+  chair: Chair of Imaginary Systems
 ---
 ```
 
@@ -45,3 +45,9 @@ test/        Vitest
 ```
 
 See [AGENTS.md](AGENTS.md) for conventions (written for agents, useful for humans), [Development](https://danielgnth.github.io/slidev-tum-theme/development/) for the details, and [Releasing](https://danielgnth.github.io/slidev-tum-theme/development/releasing/) for the release flow with npm trusted publishing and SLSA provenance.
+
+## Licence and disclaimer
+
+The code and documentation are [MIT licensed](LICENSE).
+
+This is an independent project: it is **not affiliated with, sponsored by or endorsed by the Technical University of Munich (TUM)**. The TUM name, the TUM logo and the Uhrenturm drawing belong to TUM and are **excluded from the licence**. Use them only as TUM's corporate design guidelines allow. See [NOTICE.md](NOTICE.md).

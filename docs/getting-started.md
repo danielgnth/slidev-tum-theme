@@ -39,7 +39,7 @@ themeConfig:
   lang: en # en | de
   shortTitle: Networking
   shortAuthor: M. Mustermann
-  chair: Chair of Network Architectures and Services
+  chair: Chair of Imaginary Systems
 transition: none
 ---
 ```

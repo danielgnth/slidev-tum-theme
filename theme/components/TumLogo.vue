@@ -1,5 +1,6 @@
 <!--
   TUM logo, traced from \TUMLogo in tumlogo.sty.
+  The logo is a TUM trademark and not covered by the MIT licence (see NOTICE.md).
   <TumLogo />                    blue, 28px high
   <TumLogo color="white" :height="60" />
 -->

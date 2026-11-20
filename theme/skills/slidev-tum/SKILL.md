@@ -27,7 +27,7 @@ tower: true # Uhrenturm drawing on the title slide
 themeConfig:
   lang: en # en | de: all generated labels
   header: compact # compact (title next to logo) | full (chair/school/university above)
-  chair: Chair of Network Architectures and Services
+  chair: Chair of Imaginary Systems
   shortTitle: Networking # footer
   shortAuthor: M. Mustermann # footer
   # school, university, department: override the organisation lines

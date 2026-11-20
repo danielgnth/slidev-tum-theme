@@ -16,7 +16,7 @@ themeConfig:
   header: compact               # compact (title next to logo) | full (chair lines above title)
   shortTitle: Networking
   shortAuthor: M. Mustermann
-  chair: Chair of Network Architectures and Services
+  chair: Chair of Imaginary Systems
   # school: TUM School of Computation, Information and Technology
   # university: Technical University of Munich
   # footer: false               # or a custom string
@@ -321,6 +321,6 @@ layout: references
 
 ---
 layout: end
-email: max.mustermann@tum.de
+email: max.mustermann@example.org
 web: www.tum.de
 ---

@@ -2,7 +2,7 @@
   Closing slide, same composition as the cover. Body defaults to "Questions?".
   ---
   layout: end
-  email: jane.doe@tum.de
+  email: jane.doe@example.org
   web: www.cs.cit.tum.de
   tower: true
   ---

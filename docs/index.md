@@ -18,7 +18,7 @@ theme: tum
 title: Something with Networking
 author: Max Mustermann
 themeConfig:
-  chair: Chair of Network Architectures and Services
+  chair: Chair of Imaginary Systems
 ---
 ```
 
@@ -49,4 +49,4 @@ Then `pnpm dev`. The [getting started guide](getting-started.md) has the details
 - **Ready for AI agents**: the package ships an agent skill so Claude Code, Copilot and others write decks that use the theme correctly: see [Writing slides with AI](ai.md)
 
 !!! note "Not an official TUM product"
-    This theme follows the public TUM corporate design guidelines. Use the TUM logo only as the corporate design allows.
+    This is an independent project, not affiliated with, sponsored by or endorsed by TUM. The code is MIT licensed; the TUM name, the TUM logo and the Uhrenturm drawing belong to TUM and are excluded from the licence ([NOTICE](https://github.com/danielgnth/slidev-tum-theme/blob/main/NOTICE.md)). Use them only as the TUM corporate design guidelines allow.
