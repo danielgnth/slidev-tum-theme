@@ -1,0 +1,31 @@
+# Transitive CLI/lint/test devDependencies that never ship in slidev-theme-tum
+# (zero runtime dependencies) or in the built Slidev example decks.
+# Keep in sync with `audit.ignore` in pnpm-workspace.yaml.
+
+[[IgnoredVulns]]
+id = "GHSA-5p2g-fcmc-qvqq"
+reason = "Dev-only transitive dependency (pptxgenjs -> image-size); unused at runtime and excluded from browser bundles"
+
+[[IgnoredVulns]]
+id = "GHSA-w3rx-r6r6-pgpr"
+reason = "Dev-only transitive dependency (pptxgenjs -> image-size); unused at runtime and excluded from browser bundles"
+
+[[IgnoredVulns]]
+id = "GHSA-5pm8-86m8-9m6r"
+reason = "Dev-only transitive dependency (release-it -> get-uri -> basic-ftp); FTP protocol is never used"
+
+[[IgnoredVulns]]
+id = "GHSA-c475-qrg2-pj4r"
+reason = "Dev-only transitive dependency (release-it -> get-uri -> basic-ftp); FTP protocol is never used"
+
+[[IgnoredVulns]]
+id = "GHSA-r4jh-29pc-gfqr"
+reason = "Dev-only transitive dependency (release-it -> get-uri -> basic-ftp); FTP protocol is never used"
+
+[[IgnoredVulns]]
+id = "GHSA-3g3m-2fjr-6pw4"
+reason = "Dev-only transitive dependency (@vue/test-utils -> js-beautify -> glob); only imported by unused js-beautify CLI"
+
+[[IgnoredVulns]]
+id = "GHSA-g3hv-75wg-m249"
+reason = "Dev-only transitive dependency (eslint / editorconfig -> minimatch); only evaluates trusted repository globs"

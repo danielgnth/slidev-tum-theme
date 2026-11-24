@@ -13,8 +13,31 @@ trustPolicyExclude:
 # package.json scripts behave the same on every OS
 shellEmulator: true
 
+# CLI/lint/test-only transitive devDependencies; none ship in slidev-theme-tum or built decks
+audit:
+  ignore:
+    # image-size@1.2.1 via pptxgenjs (pre-bundled dist; browser maps image-size: false)
+    - GHSA-5p2g-fcmc-qvqq
+    - GHSA-w3rx-r6r6-pgpr
+    # basic-ftp@5.3.1 via release-it > proxy-agent > pac-proxy-agent > get-uri (FTP unused)
+    - GHSA-5pm8-86m8-9m6r
+    - GHSA-c475-qrg2-pj4r
+    - GHSA-r4jh-29pc-gfqr
+    # glob@13.0.7 via @vue/test-utils > js-beautify (only imported by unused js-beautify CLI)
+    - GHSA-3g3m-2fjr-6pw4
+    # minimatch@10.2.6 via eslint / typescript-eslint / editorconfig (trusted local globs only)
+    - GHSA-g3hv-75wg-m249
+  ignorePrune: true
+
 packages:
   - theme
+
+# transitive dependencies bundled into the built Slidev example decks
+overrides:
+  # monaco-editor@0.57.0 pins 3.4.15 (GHSA-p98j-92pf-mc4p, GHSA-6688-9rhm-gjv2, GHSA-c6gr-qvv4-5v3f, GHSA-mrv2-3pqr-j5jr, GHSA-cg2g-xh64-v4q7)
+  dompurify: ^3.4.18
+  # micromark-extension-math@3.1.0 pins ^0.16.0 (GHSA-238p-pmpm-9mq7); @slidev/* already uses 0.19.1
+  katex: ^0.19.1
 
 # no install scripts unless listed here
 allowBuilds:
