@@ -96,7 +96,7 @@ slsa-verifier source source.intoto.jsonl "$commit" \
 3. **Environment.** The environment `npm` only accepts deployments from tags matching `v*` (repository settings → *Environments*). Add required reviewers if releases should need a second approval.
 4. **Rulesets.** The SLSA source tool reads the controls from the repository rulesets:
     - **Tags:** a ruleset for all tags (`~ALL`, no exclusions) that blocks deletion, updates and non-fast-forward pushes. This is the *protected refs* control (L3), and *safe expunge* (L2) depends on it: without it the release stops at Source Level 1.
-    - **`main`:** block force pushes and deletions (*continuity*, L2), require pull requests and the `ci-ok` status check.
+    - **`main`:** block force pushes and deletions (*continuity*, L2), require pull requests and an up-to-date `ci-ok` status check.
     - *Two-party review* (L4) additionally needs at least one approval, dismissing stale reviews, code owner review and approval of the last push, which a single-maintainer repository cannot satisfy.
 5. **Source level.** The release requires Source Level 2 by default. With both rulesets in place, revisions reach Level 3: set the repository variable `SLSA_SOURCE_LEVEL` to `3`. Controls count from the push after they were enabled, because the source provenance is computed when a commit lands on `main`.
 6. **Pages.** *Settings* → *Pages* → Source: GitHub Actions.
