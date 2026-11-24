@@ -55,7 +55,7 @@ jobs:
             process.exit(rc || 1)
           }
 
-          if (report?.error || !report?.advisories || typeof report.advisories !== 'object') {
+          if (report?.error || !report?.advisories || typeof report.advisories !== 'object' || Array.isArray(report.advisories)) {
             const msg = report?.error?.summary ?? 'missing advisories object'
             console.error(`::error::pnpm audit returned an error (exit ${rc}): ${msg}`)
             process.exit(rc || 1)
@@ -68,6 +68,7 @@ jobs:
           }
 
           const esc = v => String(v ?? '').replace(/\|/g, '\\|').replace(/\r?\n/g, ' ')
+          const escCmd = v => String(v ?? '').replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A')
           const lines = ['### pnpm audit (moderate+)', '']
 
           if (advisories.length === 0) {
@@ -78,10 +79,10 @@ jobs:
             lines.push('| --- | --- | --- | --- | --- |')
             for (const adv of advisories) {
               const versions = [...new Set((adv.findings ?? []).map(f => f.version).filter(Boolean))].join(', ') || '-'
-              const ghsa = adv.github_advisory_id ?? String(adv.id ?? 'unknown')
+              const ghsa = adv.github_advisory_id || String(adv.id ?? 'unknown')
               const advisoryLink = adv.url ? `[${esc(ghsa)}](${esc(adv.url)})` : esc(ghsa)
               lines.push(`| ${esc(adv.severity)} | ${esc(adv.module_name)} | ${esc(versions)} | ${esc(adv.patched_versions || 'none')} | ${advisoryLink} |`)
-              console.log(`::warning::${adv.severity} advisory ${ghsa} in ${adv.module_name}@${versions} (patched: ${adv.patched_versions || 'none'})`)
+              console.log(`::warning::${escCmd(`${adv.severity} advisory ${ghsa} in ${adv.module_name}@${versions} (patched: ${adv.patched_versions || 'none'})`)}`)
             }
           }
 
